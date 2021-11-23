@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios'
+
+axios.defaults.baseURL = 'https://green-thumb-64168.uc.r.appspot.com/';
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 
 ReactDOM.render(
   <React.StrictMode>
