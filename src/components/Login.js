@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
@@ -13,7 +11,6 @@ const Login = () => {
     const [details, setDetails] = useState({ userName: "", password: "" });
     const [loggedIn, setLoggedIn] = useState(false)
     const [error, setError] = useState("")
-    //let navigate = useNavigate();
 
     const loginHandler = async (e) => {
         e.preventDefault();
@@ -21,7 +18,7 @@ const Login = () => {
             username: details.userName,
             password: details.password
         }
-         await axios.post('login', data).then(
+        await axios.post('login', data).then(
             res => {
                 console.log(res)
                 localStorage.setItem('token', res.data.token)
@@ -29,13 +26,13 @@ const Login = () => {
             }
         ).catch(
             err => {
-               setError(err.response.data.error)
-            }) 
+                setError(err.response.data.error)
+            })
     }
 
-     if(loggedIn){
+    if (loggedIn) {
         return <Navigate to={'/balance'} />
-    }  
+    }
 
     let errorMessage = "";
     if (error) {
@@ -45,48 +42,37 @@ const Login = () => {
     return (
         <div>
             <Container>
-                <Row>
-                    <h1>Login</h1>
-                </Row>
-                <Row>
-                    <Col>
-                        <Form>
-                            <Form.Floating className="mb-3">
-                                <Form.Control
-                                    id="floatingInputCustom"
-                                    type="text"
-                                    placeholder="name@example.com"
-                                    onChange={e => setDetails({ ...details, userName: e.target.value })}
-                                    value={details.userName}
-                                />
-                                <label htmlFor="floatingInputCustom">Username</label>
-                            </Form.Floating>
-                            <Form.Floating className="mb-3">
-                                <Form.Control
-                                    id="floatingPasswordCustom"
-                                    type="password"
-                                    placeholder="Password"
-                                    onChange={e => setDetails({ ...details, password: e.target.value })}
-                                    value={details.password}
-                                />
-                                <label htmlFor="floatingPasswordCustom">Password</label>
-                            </Form.Floating>
-                        </Form>
-                        {error ? errorMessage : ""}
-                    </Col>
-                </Row>
-                <Row>
-                    <div>
-                         <Button variant="dark" size="lg" className="btn mb-3" onClick={loginHandler}>
-                            Login
-                        </Button> 
-                        <Link to="/">
-                            <Button variant="outline-dark" size="lg" className="btn">
-                                Register
-                            </Button>
-                        </Link>
-                    </div>
-                </Row>
+                <h1 className="link">Login</h1>
+
+                <Form>
+                    <Form.Floating className="mb-3">
+                        <Form.Control
+                            type="text"
+                            placeholder="name@example.com"
+                            onChange={e => setDetails({ ...details, userName: e.target.value })}
+                            value={details.userName}
+                        />
+                        <label htmlFor="floatingInputCustom">Username</label>
+                    </Form.Floating>
+
+                    <Form.Floating className="mb-3">
+                        <Form.Control
+                            type="password"
+                            placeholder="Password"
+                            onChange={e => setDetails({ ...details, password: e.target.value })}
+                            value={details.password}
+                        />
+                        <label htmlFor="floatingPasswordCustom">Password</label>
+                    </Form.Floating>
+                </Form>
+
+                {error ? errorMessage : ""}
+
+                <div>
+                    <Button variant="dark" size="lg" className="btn mb-3" onClick={loginHandler}>Login</Button>
+                    <Link to="/"><Button variant="outline-dark" size="lg" className="btn">Register</Button></Link>
+                </div>
+
             </Container>
         </div>
     )

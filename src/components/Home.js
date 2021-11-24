@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -13,7 +11,6 @@ function Home() {
     const [details, setDetails] = useState({ userName: "", password: "", confirmPassword: "" })
     const [error, setError] = useState("")
 
-    //const {userName, password} = registeredUser
     const newUser = {
         username: details.userName,
         password: details.password
@@ -42,18 +39,13 @@ function Home() {
     return (
         <div>
             <Container>
-                <Row>
-                    <Col><Link to={"/login"} className="link"><BsFillArrowLeftSquareFill size="2em" /></Link></Col>
+                <Link to={"/login"}><BsFillArrowLeftSquareFill size="2em" className="link"/></Link>
                     <h1>Register</h1>
-                </Row>
-                <Row>
-                    <Col>
                         <>
                             <Form.Floating className="mb-3">
                                 <Form.Control
-                                    id="floatingInputCustom"
                                     type="text"
-                                    placeholder="name@example.com"
+                                    placeholder="username"
                                     onChange={e => setDetails({ ...details, userName: e.target.value })}
                                     value={details.userName}
                                 />
@@ -61,7 +53,6 @@ function Home() {
                             </Form.Floating>
                             <Form.Floating className="mb-3">
                                 <Form.Control
-                                    id="floatingPasswordCustom1"
                                     type="password"
                                     placeholder="Password"
                                     onChange={e => setDetails({ ...details, password: e.target.value })}
@@ -71,7 +62,6 @@ function Home() {
                             </Form.Floating>
                             <Form.Floating className="mb-3">
                                 <Form.Control
-                                    id="floatingPasswordCustom2"
                                     type="password"
                                     placeholder="Password"
                                     onChange={e => setDetails({ ...details, confirmPassword: e.target.value })}
@@ -81,19 +71,12 @@ function Home() {
                             </Form.Floating>
                         </>
                         {error ? errorMessage : ""}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
                         <div className="d-grid">
                             <Button variant="dark" size="lg" onClick={registerHandle}>
                                 Register
                             </Button>
                         </div>
-                    </Col>
-                </Row>
             </Container>
-
         </div>
     )
 }
